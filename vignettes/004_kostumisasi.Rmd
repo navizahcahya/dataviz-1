@@ -54,7 +54,7 @@ plot_household <-
                                  "#37c871",
                                  "#b3b3b3",
                                  "#b3b3b3"))
-plot_household
+plot_household 
 ```
 
 Sekarang grafik tersebut nampak lebih baik dengan diperbaikinya titik-titik data yang menumpuk dan pergantian palet warna. Anda juga dapat menggunakan palet warna lain, misalnya `scale_colour_brewer()` atau `scale_colour_viridis()` dari paket viridis. Jika diperhatikan dengan saksama, Anda dapat menyaksikan bahwa penamaan obyek pada legenda ditulis terbalik (contoh pada safe_water 25 ditulis paling atas, kemudian, 50, terakhir 70). Anda dapat memperbaiki hal tersebut dengan mengatur nilai pada argumen `reverse` pada baris kode `guides()` menjadi TRUE!
@@ -126,6 +126,6 @@ Selain dengan menggunakan *preset theme* dari ggplot2 atau meracik tema sendiri,
 
 ```{r facet-plot_household}
 plot_household +
-  facet_wrap(~year)
+  facet_wrap(~year) #grid untuk kesamping
 ```
 
