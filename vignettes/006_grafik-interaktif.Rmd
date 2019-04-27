@@ -2,7 +2,7 @@
 title: "Grafik Interaktif"
 author: "Muhammad Aswan Syahputra"
 output: 
-  github_document:
+  html_document:
     fig_height: 6
     fig_width: 9
 editor_options: 
@@ -16,14 +16,15 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = "center", message = FALSE, warnin
 Selain membuat grafik statis dan animasi dari grafik statis, Anda juga dapat membuat grafik interaktif dengan mudah menggunakan bantuan dari paket plotly. Aktifkanlah paket plotly beserta paket tidyverse dengan cara mengisi bagian ___ dengan jawaban yang tepat!
 
 ```{r load-package}
-___
-___
+library(tidyverse)
+library(plotly)
 ```
 
 Sekarang kita Akan melakukan eksperimen dengan menggunakan dataset airquality yang disediakan oleh R. Anda dapat mempelajari informasi dataset ini dengan cara menjalankan `?airquality`. Tulis dan jalankanlah baris kode R untuk mengetahui struktur dataset airquality tersebut!
 
 ```{r explore-airquality}
-___
+?airquality
+airquality
 ```
 
 Jika diperhatikan, penulisan data bulan pada dataset airquality masih menggunakan angka. Dalam *chunk* berikut kita akan mengubah penulisan tersebut menggunakan singkatan nama bulan dan menyimpan hasil perubahan dataset tersebut ke dalam obyek R dengan nama aq. R telah menyediakan vektor yang berisi nama-nama bulan, baik tanpa disingkat dan disingkat, sehingga dapat mudah kita gunakan. Anda dapat mencobanya dengan menjalankan `month.name` dan `month.abb` pada konsol RStudio!
@@ -44,15 +45,15 @@ Sekarang buatlah *scatterplot* dengan nama plot_aq berdasarkan kriteria berikut:
 
 ```{r plot-aq}
 plot_aq <- 
-  ggplot(aq, aes(x = ___, y = ___, col = ___)) +
-  ___
+  ggplot(aq, aes(x = Solar.R, y = Temp, col = Month)) +
+  geom_line()
 plot_aq
 ```
 
 Anda telah membuat *scatterplot* statis dengan nama plot_aq. Sekarang kita akan menggunakan fungsi `ggplotly()` dari paket plotly untuk mengubah grafik statis tersebut menjadi grafik interaktif. Isilah bagian ___ dengan nama *scatterplot* yang telah Anda buat!
 
 ```{r iplot-aq}
-iplot_aq <- ggplotly(___)
+iplot_aq <- ggplotly(plot_aq)
 iplot_aq
 ```
 
@@ -62,7 +63,17 @@ Selamat Anda telah berhasil membuat grafik interaktif pertama! Sekarang untuk gr
 load("../data/weather.rda")
 weather
 ```
+```{r}
+weather <- 
+  ggplot(weather, aes(x = time, y = temperature, col = windspeed)) +
+  geom_line()
+weather
+```
 
+```{r iplot-aq}
+weather <- ggplotly(weather)
+weather
+```
 Anda telah berhasil membuat beberapa grafik interaktif, namun bagaimana cara menyimpan grafik-grafik tersebut? Ada dua cara yang dapat dilakukan:
 
 1. Menjalankan `iplot_aq` pada RStudio konsol yang otomatis akan membuka *web-viewer*. Kemudian Anda dapat klik pada tombol **Export** pad pilih **Save as Web Page...**
@@ -70,13 +81,14 @@ Anda telah berhasil membuat beberapa grafik interaktif, namun bagaimana cara men
 
 ```{r save-iplot_aq}
 library(htmlwidgets)
-saveWidget(iplot_aq, "iplot_aq.html")
+saveWidget(iplot_aq, "iplot_rq.html")
 ```
 
 Sekarang simpanlah grafik interaktif dari dataset weather yang telah Anda buat!
 
 ```{r save-plot-weather}
-saveWidget(___, ___)
+library(htmlwidgets)
+saveWidget(weather, "cuaca.html")
 ```
 
 Grafik interaktif sangat cocok disajikan dalam bentuk laman web atau aplikasi web. Anda dapat dengan mudah membuat aplikasi web menggunakan R dengan bantuan paket shiny. Di aplikasi web Anda juga memberikan kontrol kepada pengguna untuk memodifikasi elemen pada grafik statis maupun dinamis. Pada modul 007 Anda ditunjukan cara membuat aplikasi web sederhana dengan hanya menggunakan dokumen R Markdown!
